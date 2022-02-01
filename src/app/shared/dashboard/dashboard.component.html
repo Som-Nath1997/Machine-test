@@ -1,0 +1,50 @@
+<nav class="navbar navbar-light bg-primary">
+    <div class="container">
+        <h1 style="color: white">Angular-Crud-App</h1>
+        <div *ngIf="message" style="position: absolute; 
+        transform: translateX(50%); right: 50%; " class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Deleted!</strong> Employee Deleted Succesfully.
+            <button (click)="remove()" type="button" class="btn-close" data-bs-dismiss="alert"
+                aria-label="Close"></button>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid img">
+    <div class="container pt-4">
+        <table class="table table-hover table-info table-striped  ">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Password</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Reg_Date</th>
+                    <th scope="col">Satus</th>
+                    <th scope="col">Employee Data View/Edit/Delete</th>
+                </tr>
+            </thead>
+            <tbody class="table-striped">
+                <tr *ngFor="let item of items">
+                    <td>{{ item.user_id}}</td>
+                    <td>{{ item.user_name }}</td>
+                    <td>{{ item.user_email}}</td>
+                    <td>{{ item.user_pwd }}</td>
+                    <td>{{ item.user_phone_no}}</td>
+                    <td>{{ item.user_gender }}</td>
+                    <td>{{ item.user_reg_date }}</td>
+                    <td>{{ item.user_satus }}</td>
+                    
+                   
+                    <td>
+                         <a href="#" [routerLink]="['/item/', item.user_id, 'view']" class="btn btn-info  mx-3 ">View</a>
+                        <a href="#" [routerLink]="['', 'edit']" class="btn btn-primary mx-3 ">Edit</a> 
+                        <button type="button" (click)="deletePost(item.user_id , item.user_name)"
+                            class="btn btn-danger mx-3 ">Delete</button>
+                    </td>
+                </tr>
+                </tbody>
+        </table>
+    </div>
+</div>
