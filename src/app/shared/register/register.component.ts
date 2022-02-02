@@ -9,8 +9,8 @@ import{AuthService} from "../auth.service"
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  message: boolean = false;
   public form: FormGroup;
-  hobbies!: FormArray;
 
   constructor(public auth: AuthService, public route:Router) {
     this.form = new FormGroup({
@@ -35,15 +35,15 @@ export class RegisterComponent implements OnInit {
   submit() {
     console.log(this.form.value);
     this.auth.post(this.form.value).subscribe((res) => {
-      // this.message = true;
-      console.log('Employee created successfully!');
-      this.form.reset({});
+        this.route.navigateByUrl('/login');
+      console.log('User Register successfully!');
+      this.message = true;
       this.form.disable();
-      this.route.navigateByUrl('/login');
     });
   }
   changeuser_gender(e:any) {
 
    }
+
    
 }

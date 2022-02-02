@@ -9,6 +9,7 @@ import{AuthService} from "../auth.service"
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  message: boolean = false;
   public form: FormGroup;
 
   constructor(public auth: AuthService, public route:Router) {
@@ -29,11 +30,23 @@ export class LoginComponent implements OnInit {
   submit() {
     console.log(this.form.value);
     this.auth.login(this.form.value).subscribe((res) => {
-      // this.message = true;
-      console.log('Login successfully!');
-      this.form.reset({});
-      this.form.disable();
-      // this.route.navigateByUrl('/login');
+      if(res.status == 1){
+        console.log(res);
+        this.route.navigateByUrl('/dashboard');
+      }
+      else{
+        console.log(res);
+        if ((this.message = true)) {
+          setTimeout(() => this.remove(), 2000);
+        }
+
+      }
+     
+      
     });
+  }
+  remove() {
+    // auto close alert if required
+    this.message = false;
   }
 }

@@ -9,7 +9,7 @@
         </div>
     </div>
 </nav>
-<div class="container-fluid img">
+<div class="container-fluid img" style="width: 100%;">
     <div class="container pt-4">
         <table class="table table-hover table-info table-striped  ">
             <thead class="table-dark">
@@ -22,7 +22,7 @@
                     <th scope="col">Gender</th>
                     <th scope="col">Reg_Date</th>
                     <th scope="col">Satus</th>
-                    <th scope="col">Employee Data View/Edit/Delete</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody class="table-striped">
@@ -38,8 +38,7 @@
                     
                    
                     <td>
-                         <a href="#" [routerLink]="['/item/', item.user_id, 'view']" class="btn btn-info  mx-3 ">View</a>
-                        <a href="#" [routerLink]="['', 'edit']" class="btn btn-primary mx-3 ">Edit</a> 
+                        <a href="#" [routerLink]="[ '/edit/', item.user_id]" class="btn btn-primary mx-3 ">Edit</a> 
                         <button type="button" (click)="deletePost(item.user_id , item.user_name)"
                             class="btn btn-danger mx-3 ">Delete</button>
                     </td>

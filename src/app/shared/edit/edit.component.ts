@@ -10,20 +10,21 @@ import{Item} from '../item'
   styleUrls: ['./edit.component.css']
 })
 export class EditComponent implements OnInit {
-  item?:Item
+  public item: any;
   public form: FormGroup;
   user_id:number;
 
   constructor(public auth: AuthService, public route:Router, private routes: ActivatedRoute,) { 
     this.user_id = this.routes.snapshot.params['itemId'];
-    this.auth.find(this.user_id).subscribe((data: Item) => {
-      this.item = data;
+    this.auth.find(this.user_id).subscribe((res) => {
+      this.item = res.data[0];
       this.form.patchValue({
-        user_name: data.user_name,
-        user_email: data.user_email,
-        user_phone_no: data.user_phone_no,
-        user_pwd: data.user_pwd,
-        user_gender: data.user_gender,
+        user_id: this.item.user_id,
+        user_name: this.item.user_name,
+        user_email: this.item.user_email,
+        user_phone_no: this.item.user_phone_no,
+        user_pwd: this.item.user_pwd,
+        user_gender: this.item.user_gender,
       });
     });
 
@@ -48,12 +49,13 @@ export class EditComponent implements OnInit {
   }
   submit() {
     console.log(this.form.value);
-    this.auth.post(this.form.value).subscribe((res) => {
+    this.auth.update(this.form.value).subscribe((res) => {
+      console.log(res)
       // this.message = true;
-      console.log('Employee created successfully!');
+      console.log('Employee updated successfully!');
       this.form.reset({});
       this.form.disable();
-      this.route.navigateByUrl('/login');
+      // this.route.navigateByUrl('/login');
     });
   }
   changeuser_gender(e:any) {
